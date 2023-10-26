@@ -1,3 +1,4 @@
+<# Windows PowerShell #>
 <# List users from groups#>
 <# Lista usuários de grupos#>
 Import-Module ActiveDirectory
