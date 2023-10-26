@@ -3,18 +3,23 @@
 <# Lista usuários de grupos#>
 Import-Module ActiveDirectory
 
+<#Get-ADGroup -filter "Name -like 'NomeInicial*'" | Select Name #>
+<#NomeInicial é o inicio dos nomes dos grupos que voce quer buscar no AD - NomeInicial it's the name of the group that you want to find#>
+
 <# Import file csv with the name of the groups / Importe aqui o arquivo CSV com o nome dos grupos#>
 $ADGroups = Import-csv C:\temporary\Grupos.csv <# Váriavel para capturar os grupos #>
- 
+
 foreach ($NGrupo in $ADGroups)
 {
-	$GrupoAD 		 = $Ngrupo.Lista
-	Get-ADGroupMember $GrupoAD | Select SamAccountName 
-    Write-Output "Arquivo $GrupoAD gerado!"
+<#o campo Lista deve estar na primeira linha do arquivo Grupos.csv#>
+	$GrupoAD 		 = $NGrupo.Lista
+ 
+    $print = Get-ADGroupMember $GrupoAD | Select SamAccountName
+    $print | Out-File "C:\temp\$GrupoAD.txt"
 }
 
 <# Content from file Grupos.CSV
-The first line needs to be completed with the name Lista and the next lines you need to put the name of the group like the example bellow
+The first line needs to be completed with the name Lista and the next lines you need to put the name of the group like the example bellow, see file grupos.csv
 Lista
 NameOfTheGroup1
 NameOfTheGroup2
