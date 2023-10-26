@@ -1,0 +1,20 @@
+<# List users from groups#>
+<# Lista usuários de grupos#>
+Import-Module ActiveDirectory
+
+<# Import file csv with the name of the groups / Importe aqui o arquivo CSV com o nome dos grupos#>
+$ADGroups = Import-csv C:\temporary\Grupos.csv <# Váriavel para capturar os grupos #>
+ 
+foreach ($NGrupo in $ADGroups)
+{
+	$GrupoAD 		 = $Ngrupo.Lista
+	Get-ADGroupMember $GrupoAD | Select SamAccountName 
+    Write-Output "Arquivo $GrupoAD gerado!"
+}
+
+<# Content from file Grupos.CSV
+The first line needs to be completed with the name Lista and the next lines you need to put the name of the group like the example bellow
+Lista
+NameOfTheGroup1
+NameOfTheGroup2
+#>
